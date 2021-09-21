@@ -1,21 +1,62 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useEffect, useState}from 'react';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import * as Location from 'expo-location';
+import { LinearGradient } from 'expo-linear-gradient';
 
+import DateTime from './src/components/DateTime'
+import WeatherSection from './src/components/WeatherSection'
 export default function App() {
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        fetchDataFromApi("40.7128", "-74.0060")
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      fetchDataFromApi(location.coords.latitude, location.coords.longitude);
+    })();
+  }, [])
+
+  const fetchDataFromApi = (latitude, longitude) => {
+    if(latitude && longitude) {
+      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=4a916b90486c8e612e7fde46d275d795`)
+      .then(res => res.json())
+      .then(data => {
+      setData(data)
+      console.log(data)
+      })
+    }
+    
+  }
+
+  const sunnyColor1 = '#0353a4'
+  const sunnyColor2 = '#0466c8'
+
+  const rainyColor1 = '#33415c'
+  const rainyColor2 = '#5c677d'
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+    <StatusBar
+                backgroundColor="transparent"
+                translucent={true}
+    />
+    <LinearGradient colors={[sunnyColor1, sunnyColor1, sunnyColor2]} style={styles.container}>
+        <DateTime current={data.current} timezone={data.timezone} lat={data.lat} lon={data.lon}/>
+        <WeatherSection weatherData={data.daily}/>
+    </LinearGradient>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 20
   },
 });
