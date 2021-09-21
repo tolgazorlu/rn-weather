@@ -43,15 +43,9 @@ const DateTime = ({ current, lat, lon, timezone }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.5,
+        flex: 0.7,
         flexDirection: "row",
         justifyContent: 'space-between',
-    },
-    heading: {
-        fontSize: 15,
-        color: 'white',
-        fontWeight: '100',
-        textAlign: 'center'
     },
     subheading: {
         fontSize: 15,

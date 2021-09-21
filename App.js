@@ -24,7 +24,7 @@ export default function App() {
 
   const fetchDataFromApi = (latitude, longitude) => {
     if(latitude && longitude) {
-      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=4a916b90486c8e612e7fde46d275d795`)
+      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=alerts&units=metric&appid=4a916b90486c8e612e7fde46d275d795`)
       .then(res => res.json())
       .then(data => {
       setData(data)
@@ -34,22 +34,24 @@ export default function App() {
     
   }
 
-  const sunnyColor1 = '#0353a4'
-  const sunnyColor2 = '#0466c8'
-
-  const rainyColor1 = '#33415c'
-  const rainyColor2 = '#5c677d'
-
   return (
     <>
     <StatusBar
                 backgroundColor="transparent"
                 translucent={true}
     />
+    {/*
     <LinearGradient colors={[sunnyColor1, sunnyColor1, sunnyColor2]} style={styles.container}>
         <DateTime current={data.current} timezone={data.timezone} lat={data.lat} lon={data.lon}/>
         <WeatherSection weatherData={data.daily}/>
     </LinearGradient>
+    */}
+    <ImageBackground source={require('./assets/background0.jpg')} style={styles.container}>
+      <LinearGradient colors={['rgba(0, 0, 0, 0.6)', 'rgba(0, 0, 0, 0.1)']} style={styles.backgroundGradient}>
+        <DateTime current={data.current} timezone={data.timezone} lat={data.lat} lon={data.lon}/>
+        <WeatherSection weatherData={data.daily} todayData={data.hourly}/>
+      </LinearGradient>
+    </ImageBackground>
     </>
   );
 }
@@ -57,6 +59,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20
   },
+  backgroundGradient: {
+    flex: 1,
+    padding: 10
+  }
 });
