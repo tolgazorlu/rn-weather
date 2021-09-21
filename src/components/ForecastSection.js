@@ -17,7 +17,7 @@ const ForecastSection = ({ data }) => {
 }
 
 const FutureForecastItem = ({ forecastItem }) => {
-    const img = { uri: "http://openweathermap.org/img/wn/" + forecastItem.weather[0].icon + "@2x.png" }
+    const img = { uri: "http://openweathermap.org/img/wn/" + forecastItem.weather[0].icon + "@4x.png" }
     return (
         <View style={styles.futureForecastItemContainer}>
             <Text style={styles.day}>{moment(forecastItem.dt * 1000).format('dddd')}</Text>
@@ -40,7 +40,10 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: 10
+        paddingLeft: 10,
+        paddingRight: 10,
+        backgroundColor: 'rgba(0, 50, 100, 0.6)',
+        borderRadius: 10
     },
     day: {
         fontSize: 20,
