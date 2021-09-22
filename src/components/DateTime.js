@@ -24,13 +24,15 @@ const DateTime = ({ current, lat, lon, timezone }) => {
             const month = time.getMonth();
             const date = time.getDate();
             const day = time.getDay();
+            const hour = time.getHours();
             setDate(days[day] + ', ' + date + ' ' + months[month])
+            setTime(hour)
 
         }, 1000);
     }, [])
 
     const city = timezone
-
+    
     return (
         <View style={styles.container}>
                 <View style={styles.rightAlign}>
