@@ -2,6 +2,7 @@ import React from 'react'
 import { View, ScrollView, Image, Text, StyleSheet } from 'react-native'
 import ForecastSection from './ForecastSection'
 import HourlyForecastSection from './hourlyForecastSection'
+
 const WeatherSection = ({ weatherData, todayData }) => {
     return (
         <>
@@ -72,6 +73,10 @@ const CurrentTemp = ({ data }) => {
                         <View>
                             <Text style={styles.infoTitles}>Pressure</Text>
                             <Text style={styles.infoRes}>{data.pressure}mbar</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.infoTitles}>Dew point</Text>
+                            <Text style={styles.infoRes}>{data.dew_point}</Text>
                         </View>
                     </View>
                 </View>

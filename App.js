@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState}from 'react';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import { StyleSheet, ImageBackground } from 'react-native';
 import * as Location from 'expo-location';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -29,9 +29,8 @@ export default function App() {
       .then(data => {
       setData(data)
       console.log(data)
-      })
+      }), 1000
     }
-    
   }
 
   return (
@@ -40,12 +39,6 @@ export default function App() {
                 backgroundColor="transparent"
                 translucent={true}
     />
-    {/*
-    <LinearGradient colors={[sunnyColor1, sunnyColor1, sunnyColor2]} style={styles.container}>
-        <DateTime current={data.current} timezone={data.timezone} lat={data.lat} lon={data.lon}/>
-        <WeatherSection weatherData={data.daily}/>
-    </LinearGradient>
-    */}
     <ImageBackground source={require('./assets/background0.jpg')} style={styles.container}>
       <LinearGradient colors={['rgba(0, 0, 0, 0.6)', 'rgba(0, 0, 0, 0.1)']} style={styles.backgroundGradient}>
         <DateTime current={data.current} timezone={data.timezone} lat={data.lat} lon={data.lon}/>

@@ -17,11 +17,10 @@ const ForecastSection = ({ data }) => {
 }
 
 const FutureForecastItem = ({ forecastItem }) => {
-    const img = { uri: "http://openweathermap.org/img/wn/" + forecastItem.weather[0].icon + "@4x.png" }
     return (
         <View style={styles.futureForecastItemContainer}>
             <Text style={styles.day}>{moment(forecastItem.dt * 1000).format('dddd')}</Text>
-            <Image source={img} style={styles.icon} />
+            <Image source={{ uri: "http://openweathermap.org/img/wn/" + forecastItem.weather[0].icon + "@4x.png" }} style={styles.icon} />
             <View style={styles.dayTemps}>
                 <Text style={styles.temp}>Day: {Math.round(forecastItem.temp.day)}&#176;C</Text>
                 <Text style={styles.temp}>Night: {Math.round(forecastItem.temp.night)}&#176;C</Text>
