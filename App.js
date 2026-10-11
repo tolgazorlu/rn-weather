@@ -6,6 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 import DateTime from './src/components/DateTime'
 import WeatherSection from './src/components/WeatherSection'
+import { OPENWEATHER_API_KEY } from './src/config'
 export default function App() {
   const [data, setData] = useState({});
 
@@ -24,7 +25,7 @@ export default function App() {
 
   const fetchDataFromApi = (latitude, longitude) => {
     if(latitude && longitude) {
-      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=alerts&units=metric&appid=***REMOVED***`)
+      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=alerts&units=metric&appid=${OPENWEATHER_API_KEY}`)
       .then(res => res.json())
       .then(data => {
       setData(data)
